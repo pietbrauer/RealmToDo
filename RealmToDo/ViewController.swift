@@ -1,9 +1,10 @@
 import UIKit
+import Realm
 
 class ViewController: UITableViewController, AddViewControllerDelegate {
-    var todos: [String] {
+    var todos: RLMArray {
         get {
-            return ["Milk", "Eggs"]
+            return ToDoItem.allObjects()
         }
     }
 
@@ -25,18 +26,28 @@ class ViewController: UITableViewController, AddViewControllerDelegate {
     }
 
     override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return todos.count
+        return Int(todos.count)
     }
 
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier("CellIdentifier", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel.text = todos[indexPath.row]
+
+        let todoItem = todos.objectAtIndex(UInt(indexPath.row)) as ToDoItem
+        cell.textLabel.text = todoItem.name
+
         return cell
     }
 
     func didFinishTypingText(typedText: String?) {
         if typedText?.utf16Count > 0 {
-            println("Got \(typedText)")
+            let newTodoItem = ToDoItem()
+            newTodoItem.name = typedText!
+
+            let realm = RLMRealm.defaultRealm()
+            realm.beginWriteTransaction()
+            realm.addObject(newTodoItem)
+            realm.commitWriteTransaction()
+            tableView.reloadData()
         }
     }
 }
