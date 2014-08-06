@@ -33,9 +33,27 @@ class ViewController: UITableViewController, AddViewControllerDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("CellIdentifier", forIndexPath: indexPath) as UITableViewCell
 
         let todoItem = todos.objectAtIndex(UInt(indexPath.row)) as ToDoItem
-        cell.textLabel.text = todoItem.name
+        var attributedText = NSMutableAttributedString(string: todoItem.name)
+        if todoItem.finished {
+            attributedText.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributedText.length))
+        } else {
+            attributedText.addAttribute(NSStrikethroughStyleAttributeName, value: 0, range: NSMakeRange(0, attributedText.length))
+        }
+
+        cell.textLabel.attributedText = attributedText
 
         return cell
+    }
+
+    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        let todoItem = todos.objectAtIndex(UInt(indexPath.row)) as ToDoItem
+
+        let realm = RLMRealm.defaultRealm()
+        realm.beginWriteTransaction()
+        todoItem.finished = !todoItem.finished
+        realm.commitWriteTransaction()
+
+        tableView.reloadData()
     }
 
     func didFinishTypingText(typedText: String?) {
