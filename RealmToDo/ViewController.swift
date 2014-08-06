@@ -4,7 +4,15 @@ import Realm
 class ViewController: UITableViewController, AddViewControllerDelegate {
     var todos: RLMArray {
         get {
-            return ToDoItem.allObjects()
+            let predicate = NSPredicate(format: "finished == false", argumentArray: nil)
+            return ToDoItem.objectsInRealm(RLMRealm.defaultRealm(), withPredicate: predicate)
+        }
+    }
+
+    var finished: RLMArray {
+        get {
+            let predicate = NSPredicate(format: "finished == true", argumentArray: nil)
+            return ToDoItem.objectsInRealm(RLMRealm.defaultRealm(), withPredicate: predicate)
         }
     }
 
@@ -25,32 +33,69 @@ class ViewController: UITableViewController, AddViewControllerDelegate {
         presentViewController(navController, animated: true, completion: nil)
     }
 
+    override func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+        return 2
+    }
+
     override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return Int(todos.count)
+        switch section {
+        case 0:
+            return Int(todos.count)
+        case 1:
+            return Int(finished.count)
+        default:
+            return 0
+        }
+
+    }
+
+    override func tableView(tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
+        switch section {
+        case 0:
+            return "To do"
+        case 1:
+            return "Finished"
+        default:
+            return ""
+        }
     }
 
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier("CellIdentifier", forIndexPath: indexPath) as UITableViewCell
 
-        let todoItem = todos.objectAtIndex(UInt(indexPath.row)) as ToDoItem
-        var attributedText = NSMutableAttributedString(string: todoItem.name)
-        if todoItem.finished {
-            attributedText.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributedText.length))
-        } else {
+        switch indexPath.section {
+        case 0:
+            let todoItem = todos.objectAtIndex(UInt(indexPath.row)) as ToDoItem
+            var attributedText = NSMutableAttributedString(string: todoItem.name)
             attributedText.addAttribute(NSStrikethroughStyleAttributeName, value: 0, range: NSMakeRange(0, attributedText.length))
+            cell.textLabel.attributedText = attributedText
+        case 1:
+            let todoItem = finished.objectAtIndex(UInt(indexPath.row)) as ToDoItem
+            var attributedText = NSMutableAttributedString(string: todoItem.name)
+            attributedText.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributedText.length))
+            cell.textLabel.attributedText = attributedText
+        default:
+            fatalError("What the fuck did you think ??")
         }
-
-        cell.textLabel.attributedText = attributedText
-
         return cell
     }
 
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        let todoItem = todos.objectAtIndex(UInt(indexPath.row)) as ToDoItem
+        var todoItem: ToDoItem?
+
+        switch indexPath.section {
+        case 0:
+            todoItem = todos.objectAtIndex(UInt(indexPath.row)) as? ToDoItem
+        case 1:
+            todoItem = finished.objectAtIndex(UInt(indexPath.row)) as? ToDoItem
+        default:
+            fatalError("What the fuck did you think ??")
+        }
+
 
         let realm = RLMRealm.defaultRealm()
         realm.beginWriteTransaction()
-        todoItem.finished = !todoItem.finished
+        todoItem?.finished = !todoItem!.finished
         realm.commitWriteTransaction()
 
         tableView.reloadData()
