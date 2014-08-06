@@ -521,6 +521,7 @@
 				F0CF65841992B5AD004A9682 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F0CF65851992B5AD004A9682 /* Build configuration list for PBXNativeTarget "RealmToDoTests" */ = {
 			isa = XCConfigurationList;
@@ -529,6 +530,7 @@
 				F0CF65871992B5AD004A9682 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
