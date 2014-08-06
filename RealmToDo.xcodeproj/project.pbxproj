@@ -13,6 +13,7 @@
 		F0CF657F1992B5AD004A9682 /* RealmToDoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF657E1992B5AD004A9682 /* RealmToDoTests.swift */; };
 		F0CF659F1992B6C6004A9682 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0CF65921992B68D004A9682 /* Realm.framework */; };
 		F0CF65A51992B963004A9682 /* Realm.framework in Embed Framework */ = {isa = PBXBuildFile; fileRef = F0CF65961992B68D004A9682 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F0CF65AD1992BDAA004A9682 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF65AC1992BDAA004A9682 /* AddViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		F0CF657D1992B5AD004A9682 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F0CF657E1992B5AD004A9682 /* RealmToDoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmToDoTests.swift; sourceTree = "<group>"; };
 		F0CF65881992B68D004A9682 /* Realm-Xcode6.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Realm-Xcode6.xcodeproj"; path = "realm-cocoa/Realm-Xcode6.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		F0CF65AC1992BDAA004A9682 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 			children = (
 				F0CF656B1992B5AC004A9682 /* AppDelegate.swift */,
 				F0CF656D1992B5AC004A9682 /* ViewController.swift */,
+				F0CF65AC1992BDAA004A9682 /* AddViewController.swift */,
 				F0CF65721992B5AC004A9682 /* Images.xcassets */,
 				F0CF65881992B68D004A9682 /* Realm-Xcode6.xcodeproj */,
 				F0CF65691992B5AC004A9682 /* Supporting Files */,
@@ -340,6 +343,7 @@
 			files = (
 				F0CF656E1992B5AC004A9682 /* ViewController.swift in Sources */,
 				F0CF656C1992B5AC004A9682 /* AppDelegate.swift in Sources */,
+				F0CF65AD1992BDAA004A9682 /* AddViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
