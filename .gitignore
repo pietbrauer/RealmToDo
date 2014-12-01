@@ -16,4 +16,5 @@ xcuserdata
 *.moved-aside
 DerivedData
 *.xcuserstate
-
+Carthage.checkout
+Carthage.build
