@@ -2,17 +2,17 @@ import UIKit
 import Realm
 
 class ViewController: UITableViewController, AddViewControllerDelegate {
-    var todos: RLMArray {
+    var todos: RLMResults {
         get {
             let predicate = NSPredicate(format: "finished == false", argumentArray: nil)
-            return ToDoItem.objectsInRealm(RLMRealm.defaultRealm(), withPredicate: predicate)
+            return ToDoItem.objectsWithPredicate(predicate)
         }
     }
 
-    var finished: RLMArray {
+    var finished: RLMResults {
         get {
             let predicate = NSPredicate(format: "finished == true", argumentArray: nil)
-            return ToDoItem.objectsInRealm(RLMRealm.defaultRealm(), withPredicate: predicate)
+            return ToDoItem.objectsWithPredicate(predicate)
         }
     }
 
