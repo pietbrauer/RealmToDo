@@ -1,3 +1,0 @@
-[submodule "realm-cocoa"]
-	path = realm-cocoa
-	url = git@github.com:pietbrauer/realm-cocoa.git
