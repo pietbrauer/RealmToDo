@@ -29,7 +29,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     }
 
     func setupNavigationBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "doneAction")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(AddViewController.doneAction))
     }
 
     override func viewDidLayoutSubviews() {
@@ -43,11 +43,10 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     }
 
     // MARK: - UITextFieldDelegate
-    
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         doneAction()
         textField.resignFirstResponder()
         return true
     }
-
 }

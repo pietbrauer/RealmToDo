@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40BE4FC61D4C071D008EE340 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40BE4FC51D4C071D008EE340 /* LaunchScreen.storyboard */; };
 		F00214EB1A2CED09000E17A8 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F00214E71A2CECFA000E17A8 /* Realm.framework */; };
 		F00214EC1A2CED09000E17A8 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F00214E71A2CECFA000E17A8 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F0CF656C1992B5AC004A9682 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF656B1992B5AC004A9682 /* AppDelegate.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		40BE4FC51D4C071D008EE340 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F00214E71A2CECFA000E17A8 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage.build/iOS/Realm.framework; sourceTree = "<group>"; };
 		F0CF65661992B5AC004A9682 /* RealmToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealmToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0CF656A1992B5AC004A9682 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		F0CF65681992B5AC004A9682 /* RealmToDo */ = {
 			isa = PBXGroup;
 			children = (
+				40BE4FC51D4C071D008EE340 /* LaunchScreen.storyboard */,
 				F0CF656B1992B5AC004A9682 /* AppDelegate.swift */,
 				F0CF656D1992B5AC004A9682 /* ViewController.swift */,
 				F0CF65AC1992BDAA004A9682 /* AddViewController.swift */,
@@ -184,6 +187,7 @@
 		F0CF655E1992B5AC004A9682 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Piet Brauer";
 				TargetAttributes = {
@@ -221,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0CF65731992B5AC004A9682 /* Images.xcassets in Resources */,
+				40BE4FC61D4C071D008EE340 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,8 +357,10 @@
 					"$(PROJECT_DIR)/Carthage.build/iOS",
 				);
 				INFOPLIST_FILE = RealmToDo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -368,8 +375,10 @@
 					"$(PROJECT_DIR)/Carthage.build/iOS",
 				);
 				INFOPLIST_FILE = RealmToDo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
