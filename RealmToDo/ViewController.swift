@@ -23,7 +23,7 @@ class ViewController: UITableViewController, AddViewControllerDelegate {
     }
 
     func setupNavigationBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addButtonAction")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ViewController.addButtonAction))
     }
 
     func addButtonAction() {
@@ -62,18 +62,21 @@ class ViewController: UITableViewController, AddViewControllerDelegate {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CellIdentifier", forIndexPath: indexPath) as UITableViewCell
+        let index = UInt(indexPath.row)
 
         switch indexPath.section {
         case 0:
-            let todoItem = todos.objectAtIndex(UInt(indexPath.row)) as ToDoItem
-            var attributedText = NSMutableAttributedString(string: todoItem.name)
-            attributedText.addAttribute(NSStrikethroughStyleAttributeName, value: 0, range: NSMakeRange(0, attributedText.length))
-            cell.textLabel.attributedText = attributedText
+            if let todoItem = todos.objectAtIndex(index) as? ToDoItem {
+                let attributedText = NSMutableAttributedString(string: todoItem.name)
+                attributedText.addAttribute(NSStrikethroughStyleAttributeName, value: 0, range: NSMakeRange(0, attributedText.length))
+                cell.textLabel?.attributedText = attributedText
+            }
         case 1:
-            let todoItem = finished.objectAtIndex(UInt(indexPath.row)) as ToDoItem
-            var attributedText = NSMutableAttributedString(string: todoItem.name)
-            attributedText.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributedText.length))
-            cell.textLabel.attributedText = attributedText
+            if let todoItem = finished.objectAtIndex(index) as? ToDoItem {
+                let attributedText = NSMutableAttributedString(string: todoItem.name)
+                attributedText.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributedText.length))
+                cell.textLabel?.attributedText = attributedText
+            }
         default:
             fatalError("What the fuck did you think ??")
         }
@@ -94,24 +97,23 @@ class ViewController: UITableViewController, AddViewControllerDelegate {
 
 
         let realm = RLMRealm.defaultRealm()
-        realm.beginWriteTransaction()
-        todoItem?.finished = !todoItem!.finished
-        realm.commitWriteTransaction()
+        try! realm.transactionWithBlock() {
+            todoItem?.finished = !todoItem!.finished
+        }
 
         tableView.reloadData()
     }
 
     func didFinishTypingText(typedText: String?) {
-        if typedText?.utf16Count > 0 {
+        if typedText?.utf16.count > 0 {
             let newTodoItem = ToDoItem()
             newTodoItem.name = typedText!
 
             let realm = RLMRealm.defaultRealm()
-            realm.beginWriteTransaction()
-            realm.addObject(newTodoItem)
-            realm.commitWriteTransaction()
+            try! realm.transactionWithBlock() {
+                realm.addObject(newTodoItem)
+            }
             tableView.reloadData()
         }
     }
 }
-
