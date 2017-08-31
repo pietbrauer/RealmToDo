@@ -2,8 +2,9 @@
 
 ## Project Setup
 
-1. Install [Carthage](https://github.com/carthage/carthage#installing-carthage)
-2. Run `carthage bootstrap`
+1. Install [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
+2. Open project directory in terminal and run `pod install` command
+3. Open Workspace of project `*.xcworkspace`
 
 ## Example Steps
 
