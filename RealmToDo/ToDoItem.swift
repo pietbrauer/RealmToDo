@@ -1,11 +1,11 @@
-import Realm
+import RealmSwift
 
-class ToDoItem: RLMObject {
-    dynamic var name = ""
-    dynamic var finished = false
-
-    convenience init(name: String) {
-        self.init()
-        self.name = name
-    }
+class ToDoItem: Object {
+  dynamic var name = ""
+  dynamic var finished = false
+  
+  convenience init(name: String) {
+    self.init()
+    self.name = name
+  }
 }
