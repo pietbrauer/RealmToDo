@@ -1,6 +1,6 @@
-import Realm
+import RealmSwift
 
-class ToDoItem: RLMObject {
+class ToDoItem: Object {
     dynamic var name = ""
     dynamic var finished = false
 

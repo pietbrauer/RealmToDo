@@ -1,52 +1,60 @@
 import UIKit
 
 protocol AddViewControllerDelegate {
-    func didFinishTypingText(typedText: String?)
+    func didFinishTyping(text: String?)
 }
 
-class AddViewController: UIViewController, UITextFieldDelegate {
+class AddViewController: UIViewController {
     var textField: UITextField?
     var newItemText: String?
     var delegate: AddViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         setupTextField()
         setupNavigationBar()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         textField?.becomeFirstResponder()
     }
 
     func setupTextField() {
-        textField = UITextField(frame: CGRectZero)
+        textField = UITextField(frame: .zero)
         textField?.placeholder = "Type in item"
         textField?.delegate = self
         view.addSubview(textField!)
     }
 
     func setupNavigationBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(AddViewController.doneAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                            target: self,
+                                                            action: #selector(AddViewController.doneAction))
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        textField?.frame = CGRectMake(11, self.topLayoutGuide.length + 50, view.frame.size.width - 22, 100)
+
+        textField?.frame = CGRect(x: 11,
+                                  y: self.topLayoutGuide.length + 50,
+                                  width: view.frame.size.width - 22,
+                                  height: 100)
     }
 
     func doneAction() {
-        delegate?.didFinishTypingText(textField?.text)
-        dismissViewControllerAnimated(true, completion: nil)
+        delegate?.didFinishTyping(text: textField?.text)
+        dismiss(animated: true, completion: nil)
     }
+}
 
-    // MARK: - UITextFieldDelegate
+extension AddViewController: UITextFieldDelegate {
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         doneAction()
         textField.resignFirstResponder()
         return true
     }
+
 }
